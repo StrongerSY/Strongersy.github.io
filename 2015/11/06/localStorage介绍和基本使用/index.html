@@ -5,17 +5,20 @@
   
   <title>Html5-localStorage 介绍和基本使用 | Again = a gain</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这段时间一直在进行AngularJS的入门学习，前一段简单看几篇教程，以及敲了一些demo。现在尝试做个小应用，TodoList。很眼熟吧，这是很多 MVC 入门经常被用到的小李子。这部分的经验也会在后面分享出来，今天先介绍下里面用到的本地存储方式 Html5 的localStorage。">
+  <meta name="description" content="这段时间一直在进行AngularJS的入门学习，前一段简单看几篇教程，以及敲了一些demo。现在尝试做个小应用，TodoList。很眼熟吧，这是很多 MVC 入门经常被用到的小李子。这部分的经验也会在后面分享出来，今天先介绍下里面用到的本地存储方式 Html5 的localStorage。
+为什么要用localStorage功能实现方面的原因TodoList 一个功能是，需要把之前的记录也能显示出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Html5-localStorage 介绍和基本使用">
 <meta property="og:url" content="http://strongersy.github.io/Blog/2015/11/06/localStorage介绍和基本使用/index.html">
 <meta property="og:site_name" content="Again = a gain">
-<meta property="og:description" content="这段时间一直在进行AngularJS的入门学习，前一段简单看几篇教程，以及敲了一些demo。现在尝试做个小应用，TodoList。很眼熟吧，这是很多 MVC 入门经常被用到的小李子。这部分的经验也会在后面分享出来，今天先介绍下里面用到的本地存储方式 Html5 的localStorage。">
+<meta property="og:description" content="这段时间一直在进行AngularJS的入门学习，前一段简单看几篇教程，以及敲了一些demo。现在尝试做个小应用，TodoList。很眼熟吧，这是很多 MVC 入门经常被用到的小李子。这部分的经验也会在后面分享出来，今天先介绍下里面用到的本地存储方式 Html5 的localStorage。
+为什么要用localStorage功能实现方面的原因TodoList 一个功能是，需要把之前的记录也能显示出">
 <meta property="og:image" content="http://ww3.sinaimg.cn/mw690/69eb024ejw1exrdz11bowj21kw0kkn1g.jpg">
-<meta property="og:updated_time" content="2015-11-12T09:41:50.000Z">
+<meta property="og:updated_time" content="2015-11-12T09:45:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Html5-localStorage 介绍和基本使用">
-<meta name="twitter:description" content="这段时间一直在进行AngularJS的入门学习，前一段简单看几篇教程，以及敲了一些demo。现在尝试做个小应用，TodoList。很眼熟吧，这是很多 MVC 入门经常被用到的小李子。这部分的经验也会在后面分享出来，今天先介绍下里面用到的本地存储方式 Html5 的localStorage。">
+<meta name="twitter:description" content="这段时间一直在进行AngularJS的入门学习，前一段简单看几篇教程，以及敲了一些demo。现在尝试做个小应用，TodoList。很眼熟吧，这是很多 MVC 入门经常被用到的小李子。这部分的经验也会在后面分享出来，今天先介绍下里面用到的本地存储方式 Html5 的localStorage。
+为什么要用localStorage功能实现方面的原因TodoList 一个功能是，需要把之前的记录也能显示出">
   
     <link rel="alternative" href="/Blog/atom.xml" title="Again = a gain" type="application/atom+xml">
   
@@ -90,7 +93,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>这段时间一直在进行AngularJS的入门学习，前一段简单看几篇教程，以及敲了一些demo。<br>现在尝试做个小应用，TodoList。很眼熟吧，这是很多 MVC 入门经常被用到的小李子。这部分的经验也会在后面分享出来，今天先介绍下里面用到的本地存储方式 Html5 的localStorage。</p>
-<a id="more"></a>
 <h3 id="为什么要用localStorage">为什么要用localStorage</h3><h4 id="功能实现方面的原因">功能实现方面的原因</h4><p>TodoList 一个功能是，需要把之前的记录也能显示出来，由于页面刷新，以及关闭浏览器等原因，我们自己的js 存储的数据肯定会丢失，从后端获取又要重新请求数据，这里前端自己就可以“自给自足”~ 即，使用浏览器本地存储。</p>
 <h4 id="为什么不是cookie">为什么不是cookie</h4><p>提到比较流传广泛的本地存储，第一个想到的肯定不是 localStorage,而是cookie。这里参考了不少网络上牛人的文章，在末尾会有参考索引供大家查看，介绍的比我详细。cookie的优点就是应用广泛，所有浏览器都能实现—来自张鑫旭大神的博客，我没验证过~，但不足是容量比较小—-4kb,而且，读取和存储还要自己来，当然网上方法一大堆。</p>
 <p>localStorage 有5M大小，而且IE8 都支持了，也不错，而且自身提供了读取存储和删除的方法，使用起来较为方便。</p>
@@ -222,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/11/06/localStorage介绍和基本使用/" data-id="cigw1r72800045ps1ttxgxz2d" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/11/06/localStorage介绍和基本使用/" data-id="cigw1vimo00046xs1lrko3uyx" class="article-share-link">Share</a>
       
       
     </footer>
