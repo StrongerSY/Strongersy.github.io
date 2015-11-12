@@ -67,6 +67,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/2015/11/12/hello-world/" class="article-date">
+  <time datetime="2015-11-12T09:42:07.000Z" itemprop="datePublished">2015-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/2015/11/12/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/Blog/2015/11/12/hello-world/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://strongersy.github.io/Blog/2015/11/12/hello-world/" data-id="cigw1r71800005ps1b4iq0t0a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-hello-world" data-title="Hello World" data-url="undefined"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"stronger"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+  
     <article id="post-localStorage介绍和基本使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/Blog/2015/11/06/localStorage介绍和基本使用/" class="article-date">
@@ -90,139 +148,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>这段时间一直在进行AngularJS的入门学习，前一段简单看几篇教程，以及敲了一些demo。<br>现在尝试做个小应用，TodoList。很眼熟吧，这是很多 MVC 入门经常被用到的小李子。这部分的经验也会在后面分享出来，今天先介绍下里面用到的本地存储方式 Html5 的localStorage。</p>
-<p>&lt;–!more–&gt;</p>
-<h3 id="为什么要用localStorage">为什么要用localStorage</h3><h4 id="功能实现方面的原因">功能实现方面的原因</h4><p>TodoList 一个功能是，需要把之前的记录也能显示出来，由于页面刷新，以及关闭浏览器等原因，我们自己的js 存储的数据肯定会丢失，从后端获取又要重新请求数据，这里前端自己就可以“自给自足”~ 即，使用浏览器本地存储。</p>
-<h4 id="为什么不是cookie">为什么不是cookie</h4><p>提到比较流传广泛的本地存储，第一个想到的肯定不是 localStorage,而是cookie。这里参考了不少网络上牛人的文章，在末尾会有参考索引供大家查看，介绍的比我详细。cookie的优点就是应用广泛，所有浏览器都能实现—来自张鑫旭大神的博客，我没验证过~，但不足是容量比较小—-4kb,而且，读取和存储还要自己来，当然网上方法一大堆。</p>
-<p>localStorage 有5M大小，而且IE8 都支持了，也不错，而且自身提供了读取存储和删除的方法，使用起来较为方便。</p>
-<h3 id="具体使用介绍">具体使用介绍</h3><p>这部分我们按照js实现方法来介绍，分为 原生 JavaScript, jQuery, AngularJS。<br>这里有一点非常值得注意，就是localStorage存储数据的时候，不论数据原来是什么格式，统一存储为字符串。所以我们读取数据的时候，需要自己进行数据解析，将他解析为我们想要用的格式。</p>
-<ul>
-<li>删除</li>
-</ul>
-<pre>
-    localStorage.removeItem("store");
-</pre>
-
-<ul>
-<li>读取</li>
-</ul>
-<pre>
-    localStorage.getItem("store");
-</pre>
-
-<ul>
-<li>存储</li>
-</ul>
-<pre>
-    localStorage.setItem("store",data);
-</pre>
-
-<p>接下来主要介绍各种方式实现的对数据的转换，从而利用localStorage。</p>
-<h4 id="原生JavaScript">原生JavaScript</h4><ul>
-<li>读取数据</li>
-</ul>
-<pre>
-    var store = localStorage.getItem("store");
-    var data = store.split(",");
-    var i,len = data.length;
-    for(i = 0; i < len; i++){
-        #操作数据
-    }
-</pre>
-
-<ul>
-<li>存储数据</li>
-</ul>
-<p>这里就是给localStorage 添加一个属性值,这部分来<a href="http://www.cnblogs.com/xiaowei0705/archive/2011/04/19/2021372.html" target="_blank" rel="external">博客园 xiaowei0705 的博客</a>。<br>这里突然有了一个疑问，为什么还需要用Jquery AngularJS 在存储数据的时候，进行转换呢？</p>
-<pre>
-    localStorage.a = 3;//设置a为"3"
-    localStorage["a"] = "sfsf";//设置a为"sfsf"，覆盖上面的值
-    localStorage.setItem("b","isaac");//设置b为"isaac"
-</pre>
-
-<h3 id="jQuery">jQuery</h3><ul>
-<li>读取数据</li>
-</ul>
-<pre>
-    var store = localStorage.getItem("store");
-    var data = JSON.parse(store);
-</pre>
-
-<ul>
-<li>存储数据</li>
-</ul>
-<pre>
-    var store = JSON.Stringify(data);
-    localStorage.setItem("store",store);
-</pre>
-
-<h3 id="AngularJS">AngularJS</h3><ul>
-<li>读取数据</li>
-</ul>
-<pre>
-    var store = localStorage.getItem("store");
-    var data = angular.fromJson(store);
-</pre>
-
-<ul>
-<li>存储数据</li>
-</ul>
-<pre>
-    var store = Angular.toJson(data);
-    localStorage.setItem("store",store);
-</pre>
-
-<h3 id="demo">demo</h3><p>做了一个小demo,也是参考<a href="http://www.cnblogs.com/xiaowei0705/archive/2011/04/19/2021372.html" target="_blank" rel="external">博客园 xiaowei0705 的博客</a>。主要就是实现了点击按钮就记录当期页面访问次数，如果不点击就不会记录，算是对localStorage 使用练习。</p>
-<h4 id="Html">Html</h4><pre><code><span class="tag">&lt;<span class="title">h3</span>&gt;</span>2.Html5 localStorage 实现本地存储<span class="tag">&lt;/<span class="title">h3</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"localStorage"</span>&gt;</span>您已经第<span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"localStorage-time"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>次来到这个页面了~~<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"color-red"</span>&gt;</span>点击按钮可以存储访问次数到本地浏览器，否则不会记录访问次数<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"storeStorage"</span>&gt;</span>存储数据<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</code></pre><h4 id="JavaScript">JavaScript</h4><pre>
-
-    $(document).ready(function(){
-        var demo = {};
-        demo.localStorage = function (){
-            var times;
-            console.log(localStorage.getItem("loadTime"));
-            if(!localStorage.getItem("loadTime")){
-                times = 0;
-            }else{
-                times = parseInt(localStorage.getItem("loadTime"));
-            }
-            console.log(times);
-            times += 1;
-            $(".storeStorage").attr("storeTimes",times);
-            $(".localStorage-time").html(times);
-
-        }
-        demo.localStorage();
-
-        demo.saveStorage = function (){
-            localStorage.setItem("loadTime",$(".storeStorage").attr("storeTimes"));
-        }
-
-        $(".storeStorage").on('click', demo.saveStorage);
-        })
-    }
-
-</pre>
-
-
-<p>最后我们看到的效果，就如下图所示：</p>
-<p><img src="http://ww3.sinaimg.cn/mw690/69eb024ejw1exrdz11bowj21kw0kkn1g.jpg" alt=""></p>
-<h3 id="结尾">结尾</h3><p>自己之前没用过localStorage，第一次用肯定有疏漏和不对的地方，本文内容大部分来自对参考文献中文章的总结，以及一点自己的思考，请大家看到这篇博文的带着批判的眼光来对待，同时多参考其他靠谱的内容，也可以看我后面列出的，我参考的文章，质量都非常的过硬，我们一起向他们认真严谨的态度学习~~~同时，对我博文的问题，欢迎大家提出宝贵意见。</p>
-<h4 id="参考文献">参考文献</h4><ol>
-<li><a href="http://www.zhangxinxu.com/wordpress/2011/09/html5-localstorage%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B/" target="_blank" rel="external">HTML5 localStorage本地存储实际应用举例</a>—张鑫旭大神博客</li>
-<li><a href="http://www.cnblogs.com/xiaowei0705/archive/2011/04/19/2021372.html" target="_blank" rel="external">HTML5 LocalStorage 本地存储</a>—博客园xiaowei0705的博客，介绍的非常详细，还有实例</li>
-<li><a href="http://www.cnblogs.com/yexiaochai/p/4509472.html" target="_blank" rel="external">HTML5本地存储Localstorage</a>—博客园叶小钗，demo 很牛。以后还要再来学习。</li>
-<li><a href="http://www.cnblogs.com/lhb25/p/store-js-for-localstorage.html" target="_blank" rel="external">store.js - 轻松实现本地存储（LocalStorage）</a>—一个本地存储的插件，看着很好用，还没尝试。</li>
-</ol>
-
+        
+          <p class="article-more-link">
+            <a href="/Blog/2015/11/06/localStorage介绍和基本使用/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/11/06/localStorage介绍和基本使用/" data-id="cigw1mtn700044as12sbbd6d9" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/11/06/localStorage介绍和基本使用/" data-id="cigw1r72800045ps1ttxgxz2d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -271,91 +205,15 @@ var duoshuoQuery = {short_name:"stronger"};
     <div class="article-entry" itemprop="articleBody">
       
         <p>首先我们先利用CSS实现最基本的三角形，搜索百度，发现了如下的方式，对我来说是知道，却老是记不住的一些实现方式，<br>哪天自己打算单独实现了，就不是这个属性搞错就是其他，所以几天好好整理一下，带着自己的理解来记忆~</p>
-<p>&lt;–!more–&gt;</p>
-<ul>
-<li>上三角形</li>
-</ul>
-<pre>
-    .triangle-up{
-        width: 0;
-        height: 0;
-        border-left: 100px solid transparent;
-        border-right: 100px solid transparent;
-        border-bottom: 100px solid red;
-
-    }
-</pre>
-
-<ul>
-<li>下三角形</li>
-</ul>
-<pre>
-
-    .triangle-down{
-        width: 0;
-        height: 0;
-        border-left: 100px solid transparent;
-        border-right: 100px solid transparent;
-        border-top: 100px sold transparent;
-    }
-</pre>
-
-<ul>
-<li>左三角形</li>
-</ul>
-<pre>
-    .triangle-down{
-        width: 0;
-        height: 0;
-        border-top: 100px sold transparent;
-        border-bottom: 100px solid transparent;
-        border-right: 100px solid red;
-
-    }
-</pre>
-
-<ul>
-<li>右三角形</li>
-</ul>
-<pre>
-
-    .triangle-down{
-        width: 0;
-        height: 0;
-        border-top: 100px sold transparent;
-        border-bottom: 100px solid transparent;
-        border-right: 100px solid red;
-    }
-
-</pre>
-
-<p>最后我们看到的效果，就如下图所示：</p>
-<p><img src="http://ww1.sinaimg.cn/mw690/69eb024egw1exh6k94tyyj21kw0u2tg9.jpg" alt="css制作基本三角形"></p>
-<p>分析一下，她的实现思想，我们就可以在后面很容易实现它，甚至做出其他的三角形，以及更丰富的样式。我们以上三角形为例子：</p>
-<p>这个三角形之所以形成，完全依赖于我们的 div 元素没有宽度高度，只是完全依赖于元素的border 属性来实现的。所以第一点就是：</p>
-<ol>
-<li>实现三角形的元素宽度和高度设置为0</li>
-</ol>
-<p>然后就是border属性的使用，我们审查元素，发现，这个三角形，高度其实是由border-bottm 这个属性的100px实现的，而宽度则是200px，很简单border－left 与border－right 的10px 相加得到的，那么我们在console 中去修改border-left 属性的值，会发现三角形的形状也随之变化，由此我们得出第二点：</p>
-<ol>
-<li>高度有对边实现，也就是我实现上三角形，border-left border-right 决定三角形宽度， 并不决定颜色，设置为transparent，而三角形的高度由对边撑开，还要设置颜色。 </li>
-</ol>
-<p>由此扩展开，我们可以通过如下制作左右直角三角形，由于border 默认宽度为 0，所以我们不设置其中左边，即可得到左直角三角形</p>
-<pre>
-    .triangle-leftstraight{
-        width: 0;
-        height: 0;
-        border-right: 100px solid transparent;
-        border-bottom: 100px solid red; 
-    }
-</pre>
-
-
-
+        
+          <p class="article-more-link">
+            <a href="/Blog/2015/10/25/利用CSS-制作基本三角形及扩展实践/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/10/25/利用CSS-制作基本三角形及扩展实践/" data-id="cigw1mtn300024as1aheu8ylp" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/10/25/利用CSS-制作基本三角形及扩展实践/" data-id="cigw1r72400025ps1zussutjc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -407,29 +265,17 @@ var duoshuoQuery = {short_name:"stronger"};
 <li>Git </li>
 <li>Node</li>
 <li>Github账号</li>
-<li>有了Node，我们就可以利用它来安装 Hexo 打开控制台，输入npm i hexo -g 即可全局安装。<br>&lt;–!more–&gt;</li>
+<li>有了Node，我们就可以利用它来安装 Hexo 打开控制台，输入npm i hexo -g 即可全局安装。</li>
 </ul>
-<p>这里Mac下面还是最方便的，因为最新的XCode已经集成了Git。<br>因为要构建一个博客，所以首先你要在Github上新建一个项目仓库，如 myBlog</p>
-<h3 id="部署_Hexo">部署 Hexo</h3><p>然后我们需要在本地在创建一个Hexo 项目，依次执行如下命令</p>
-<ul>
-<li>hexo init   这里执行了Hexo 的初始化</li>
-<li>npm install  安装需要使用的插件</li>
-<li>hexo server  这里用Hexo 自己的服务，在网址 <a href="http://0.0.0.0:4000" target="_blank" rel="external">http://0.0.0.0:4000</a> 可以查看目前搭建在本地的博客，这里有一个误区，访问地址并不是默认的 localhost:4000 ，看到有的同学在问，这里是个误区，不过Hexo会在命令行给出提示的。这里需要注意。</li>
-<li>然后我们可以选择看看Hexo的文件中，都提供给了我们什么，各个文件夹里面都包含了什么！网上很多教程都提供了详细解释，这里我就不说了！具体教程，可以参考我文末给出的链接。</li>
-<li>然后你也可以新添加文章，命令是 hexo new ‘new article’</li>
-<li>这里开始和网上许多教程，有些不一样了，这是因为Hexo版本不同导致的，首先我们需要安装Hexo-deployer-git插件，通过这个插件来实现我们的博客代码上传。然后还需要修改文件目录中的，_config.yml 文件中的deploy字段设置 其中的  type: git  repo: <a href="https://github.com/yourname/Blog.git" target="_blank" rel="external">https://github.com/yourname/Blog.git</a> (注意这里的内容之前的空格不能少，因为这是Hexo的配置文件规范)。</li>
-<li>在这之后，就是要把你的添加内容提交到Github了，首先是  hexo clean </li>
-<li>然后是 hexo deploy –generate(也可以缩写为hexo d -g) ，这样再去我们的Github查看，就会看到我们的博客代码部署到了Github。</li>
-</ul>
-<h3 id="部署我们的博客到样式">部署我们的博客到样式</h3><ul>
-<li>在我们的Github博客项目主页，将项目仓库切换到gh-pages ，点击setting，查看博客网址，类似<a href="http://benqy.github.io/hello-benqy。" target="_blank" rel="external">http://benqy.github.io/hello-benqy。</a><br>但目前的页面看上去还没有样式，我们还需要修改一点东西！</li>
-<li>去 _config.yml  修改url: <a href="http://yourname.github.io/myBlog" target="_blank" rel="external">http://yourname.github.io/myBlog</a>  以及下面的root: /Blog ，<br>然后再次用 hexo clean 以及  hexo deploy -generate 上传我们的文件，然后去我们的博客网址刷新页面，就可以看到Hexo 博客啦！！！ </li>
-</ul>
-
+        
+          <p class="article-more-link">
+            <a href="/Blog/2015/10/13/使用Hexo-快速搭建Github个人博客/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/10/13/使用Hexo-快速搭建Github个人博客/" data-id="cigw1mtn600034as1j8yym4uh" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/10/13/使用Hexo-快速搭建Github个人博客/" data-id="cigw1r72600035ps1yvjbhi7i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -439,67 +285,6 @@ var duoshuoQuery = {short_name:"stronger"};
 
 <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="post-使用Hexo-快速搭建Github个人博客" data-title="使用Hexo 快速搭建Github个人博客" data-url="undefined"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"stronger"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-  </script>
-<!-- 多说公共JS代码 end -->
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/Blog/2015/10/13/hello-world/" class="article-date">
-  <time datetime="2015-10-13T09:03:45.000Z" itemprop="datePublished">2015-10-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Blog/2015/10/13/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/10/13/hello-world/" data-id="cigw1mtml00004as1hplitbz0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="post-hello-world" data-title="Hello World" data-url="undefined"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -531,7 +316,7 @@ var duoshuoQuery = {short_name:"stronger"};
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/archives/2015/11/">November 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -543,6 +328,10 @@ var duoshuoQuery = {short_name:"stronger"};
       <ul>
         
           <li>
+            <a href="/Blog/2015/11/12/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
             <a href="/Blog/2015/11/06/localStorage介绍和基本使用/">Html5-localStorage 介绍和基本使用</a>
           </li>
         
@@ -552,10 +341,6 @@ var duoshuoQuery = {short_name:"stronger"};
         
           <li>
             <a href="/Blog/2015/10/13/使用Hexo-快速搭建Github个人博客/">使用Hexo 快速搭建Github个人博客</a>
-          </li>
-        
-          <li>
-            <a href="/Blog/2015/10/13/hello-world/">Hello World</a>
           </li>
         
       </ul>
