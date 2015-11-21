@@ -91,8 +91,7 @@
       
         <p>之前在做Angular Todolist 项目的时候，遇到一个小问题是，输入框需要敲击回车，触发内容输入，这部分功能Angular 封装在了ng-submit 指令中了。ng-submit 默认的就是敲击回车提交表单。那么我们回到原生JS 如何实现呢，很简单，待我慢慢道来~~</p>
 <p>本文实现了两种小效果，一种是输入框敲击回车，显示输入内容，一个是输入框输入内容，即可同步显示，有点类似Angular 的双向数据绑定</p>
-<p>####HTML</p>
-<pre><code>&lt;div <span class="class"><span class="keyword">class</span>=</span><span class="string">"wrapper"</span>&gt;
+<h4 id="HTML">HTML</h4><pre><code>&lt;div <span class="class"><span class="keyword">class</span>=</span><span class="string">"wrapper"</span>&gt;
     &lt;h3&gt;单击回车，输入内容并显示&lt;/h3&gt;
     &lt;input <span class="class"><span class="keyword">type</span>=</span><span class="string">"text"</span> <span class="class"><span class="keyword">class</span>=</span><span class="string">"type"</span>&gt;
     &lt;div <span class="class"><span class="keyword">class</span>=</span><span class="string">"show"</span>&gt;&lt;/div&gt;
@@ -100,8 +99,7 @@
     &lt;input <span class="class"><span class="keyword">type</span>=</span><span class="string">"text"</span> <span class="class"><span class="keyword">class</span>=</span><span class="string">"type type1"</span>&gt;
     &lt;div <span class="class"><span class="keyword">class</span>=</span><span class="string">"show1"</span>&gt;&lt;/div&gt;
 &lt;/div&gt;
-</code></pre><p>#####CSS</p>
-<pre><code><span class="class">.wrapper</span><span class="rules">{
+</code></pre><h5 id="CSS">CSS</h5><pre><code><span class="class">.wrapper</span><span class="rules">{
     <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#eee</span></span></span>;
     <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">600px</span></span></span>;
     <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">20px</span> auto</span></span>;
@@ -115,8 +113,7 @@
     <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">8px</span></span></span>;
 }</span>
 </code></pre><p>代码非常的简单，这就是一个小的demo。接下来来到了JavaScript部分</p>
-<p>####JavaScript</p>
-<pre><code><span class="keyword">var</span> input = <span class="built_in">document</span>.querySelector(<span class="string">".type"</span>);
+<h4 id="JavaScript">JavaScript</h4><pre><code><span class="keyword">var</span> input = <span class="built_in">document</span>.querySelector(<span class="string">".type"</span>);
 <span class="keyword">var</span> show = <span class="built_in">document</span>.querySelector(<span class="string">".show"</span>);
 input.addEventListener(<span class="string">"keydown"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>{
 
@@ -141,9 +138,9 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
 <p>第二个demo 内容随着敲击实时显示， 是利用了 JavaScript 事件中的 keyup 事件。此事件针对的就是输入内容时候，用户只要敲击完成，放松按键，就会触发这个事件。所以我们在这个事件绑定一个函数，就可以用户输入完一个内容，放松按键，立刻取得这个值，然后显示出来即可。</p>
 <h3 id="第二个知识点">第二个知识点</h3><p>这里用到的点实际只需加一个敲击按键为回车即可，不过这只是，本文关注的知识点之一，还有一个点也平时容易忽略。我们看上面的JavaScript 代码能发现，获取文本框输入内容的饿时候，我们使用的是  输入框的 dom 元素的 .value 属性。其实最开始，我使用的是 getAttribute 方法，以为用这个方法可以获取。但一直显示 null，令我有些不解，百度了下，换为 .value 就可以。 接下来，。。。</p>
 <p>问题描述完了，我的demo 是实现了，但是  .value 和 getAtttribue 什么区别呢 ？</p>
-<p>####.value<br>此君获取的是，输入框 dom 对象value 属性的实时值，即 你最初设定的值如果有改变，他也能得到最新值</p>
+<h4 id="-value">.value</h4><p>此君获取的是，输入框 dom 对象value 属性的实时值，即 你最初设定的值如果有改变，他也能得到最新值</p>
 <p>####getAttribute<br>它从名称看，取得的是 dom 对象的 value 属性，遗憾的是，它只能得到页面渲染后，DOM对象最初的值，那么上面的demo 最初未设置初始值，自然，我开始使用getAttribute 方法得到的是，null 了。</p>
-<p>###参考内容<br>在这里加上百度到的 dom.value 和 dom.getAttribute 的区别的回答，仅供参考</p>
+<h3 id="参考内容">参考内容</h3><p>在这里加上百度到的 dom.value 和 dom.getAttribute 的区别的回答，仅供参考</p>
 <ol>
 <li>[<a href="http://stackoverflow.com/questions/17494432/javascript-element-value-vs-element-getattributevalue)---stackoverflow" target="_blank" rel="external">http://stackoverflow.com/questions/17494432/javascript-element-value-vs-element-getattributevalue)---stackoverflow</a></li>
 </ol>
@@ -151,7 +148,7 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/11/21/文本框回车输入/" data-id="cih8vko6k0002cxs11h0cbxzf" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/11/21/文本框回车输入/" data-id="cih8yuezo0002f2s1ac20zjn6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +209,7 @@ var duoshuoQuery = {short_name:"stronger"};
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/11/12/hello-world/" data-id="cih8vko5f0000cxs19pih0qnt" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/11/12/hello-world/" data-id="cih8yuez50000f2s16s30d0ib" class="article-share-link">Share</a>
       
       
     </footer>
@@ -392,7 +389,7 @@ var duoshuoQuery = {short_name:"stronger"};
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/11/06/localStorage介绍和基本使用/" data-id="cih8vko6q0005cxs1b3t35v53" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/11/06/localStorage介绍和基本使用/" data-id="cih8yuezv0005f2s1zqciqtyj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -524,7 +521,7 @@ var duoshuoQuery = {short_name:"stronger"};
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/10/25/利用CSS-制作基本三角形及扩展实践/" data-id="cih8vko6n0003cxs1h81dc2x4" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/10/25/利用CSS-制作基本三角形及扩展实践/" data-id="cih8yuezq0003f2s17p7ejrtj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -598,7 +595,7 @@ var duoshuoQuery = {short_name:"stronger"};
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/10/13/使用Hexo-快速搭建Github个人博客/" data-id="cih8vko6p0004cxs10zptndow" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/10/13/使用Hexo-快速搭建Github个人博客/" data-id="cih8yuezt0004f2s1bo6obnaz" class="article-share-link">Share</a>
       
       
     </footer>
