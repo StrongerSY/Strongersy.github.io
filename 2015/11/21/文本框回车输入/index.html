@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Again = a gain">
 <meta property="og:description" content="之前在做Angular Todolist 项目的时候，遇到一个小问题是，输入框需要敲击回车，触发内容输入，这部分功能Angular 封装在了ng-submit 指令中了。ng-submit 默认的就是敲击回车提交表单。那么我们回到原生JS 如何实现呢，很简单，待我慢慢道来~~
 本文实现了两种小效果，一种是输入框敲击回车，显示输入内容，一个是输入框输入内容，即可同步显示，有点类似Angular 的双">
-<meta property="og:updated_time" content="2015-11-21T10:41:38.000Z">
+<meta property="og:updated_time" content="2015-11-21T10:42:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文本框回车输入">
 <meta name="twitter:description" content="之前在做Angular Todolist 项目的时候，遇到一个小问题是，输入框需要敲击回车，触发内容输入，这部分功能Angular 封装在了ng-submit 指令中了。ng-submit 默认的就是敲击回车提交表单。那么我们回到原生JS 如何实现呢，很简单，待我慢慢道来~~
@@ -141,7 +141,7 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
 <h3 id="第二个知识点">第二个知识点</h3><p>这里用到的点实际只需加一个敲击按键为回车即可，不过这只是，本文关注的知识点之一，还有一个点也平时容易忽略。我们看上面的JavaScript 代码能发现，获取文本框输入内容的饿时候，我们使用的是  输入框的 dom 元素的 .value 属性。其实最开始，我使用的是 getAttribute 方法，以为用这个方法可以获取。但一直显示 null，令我有些不解，百度了下，换为 .value 就可以。 接下来，。。。</p>
 <p>问题描述完了，我的demo 是实现了，但是  .value 和 getAtttribue 什么区别呢 ？</p>
 <h4 id="-value">.value</h4><p>此君获取的是，输入框 dom 对象value 属性的实时值，即 你最初设定的值如果有改变，他也能得到最新值</p>
-<p>####getAttribute<br>它从名称看，取得的是 dom 对象的 value 属性，遗憾的是，它只能得到页面渲染后，DOM对象最初的值，那么上面的demo 最初未设置初始值，自然，我开始使用getAttribute 方法得到的是，null 了。</p>
+<h4 id="getAttribute">getAttribute</h4><p>它从名称看，取得的是 dom 对象的 value 属性，遗憾的是，它只能得到页面渲染后，DOM对象最初的值，那么上面的demo 最初未设置初始值，自然，我开始使用getAttribute 方法得到的是，null 了。</p>
 <h3 id="参考内容">参考内容</h3><p>在这里加上百度到的 dom.value 和 dom.getAttribute 的区别的回答，仅供参考</p>
 <ol>
 <li>[<a href="http://stackoverflow.com/questions/17494432/javascript-element-value-vs-element-getattributevalue)---stackoverflow" target="_blank" rel="external">http://stackoverflow.com/questions/17494432/javascript-element-value-vs-element-getattributevalue)---stackoverflow</a></li>
@@ -150,7 +150,7 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/11/21/文本框回车输入/" data-id="cih8yuezo0002f2s1ac20zjn6" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/11/21/文本框回车输入/" data-id="cih8yvrrd0002fzs1vflgvm6v" class="article-share-link">Share</a>
       
       
     </footer>
