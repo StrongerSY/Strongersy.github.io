@@ -13,7 +13,7 @@ PS: 这部分一定要放到 服务器下">
 <meta property="og:site_name" content="Again = a gain">
 <meta property="og:description" content="学习AngularJS又中断了一段时间，因为。。。。。年底忙啊！！！自己懒啊！！！！算了，纠结这些都无果，不如，来个重新开始！昨天看了下AngularJS的路由部分，网上搜索的文章讲的都非常详细，所以，我这一片就来讲讲自己是如何一步一步是实现的吧！至于原理部分，我会分享几篇我参考的博文教程的！所以，我们今天主要讲讲实现，哎，原理等着深入了再去琢磨吧~先会用再说！
 PS: 这部分一定要放到 服务器下">
-<meta property="og:updated_time" content="2016-01-19T07:26:38.000Z">
+<meta property="og:updated_time" content="2016-01-19T07:29:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS实现路由以及去掉自带的#号">
 <meta name="twitter:description" content="学习AngularJS又中断了一段时间，因为。。。。。年底忙啊！！！自己懒啊！！！！算了，纠结这些都无果，不如，来个重新开始！昨天看了下AngularJS的路由部分，网上搜索的文章讲的都非常详细，所以，我这一片就来讲讲自己是如何一步一步是实现的吧！至于原理部分，我会分享几篇我参考的博文教程的！所以，我们今天主要讲讲实现，哎，原理等着深入了再去琢磨吧~先会用再说！
@@ -164,7 +164,7 @@ animateApp.config(<span class="keyword">function</span>(<span class="variable">$
 <p>step 3 其他的子页面</p>
 <p>然后，我们就需要建立其他需要的子页面，这部分还要注意页面的路径要和 配置的路由表中保持一致！！</p>
 <p>具体代码，我这部分是参考的 <a href="https://scotch.io/tutorials/animating-angularjs-apps-ngview" target="_blank" rel="external">Animating AngularJS Apps: ngView</a>。这部分还添加了 ngAnimate 部分实现页面切换的动画效果，其实，这因为， ng-view支持ngAnimate,<br>当切换子页面的时候，会自动添加 ng-enter ，ng-leave 类，来显示和隐藏页面！我们需要做的就是，引入 angular.animate.js 以及设置css 动画效果的类即可！！</p>
-<h3 id="去掉url中的">去掉url中的</h3><p>AngularJS 默认使用路由会添加# 在地址栏！需要引入服务 $localProvider</p>
+<h3 id="去掉url中的_‘#’">去掉url中的 ‘#’</h3><p>AngularJS 默认使用路由会添加# 在地址栏！需要引入服务 $localProvider</p>
 <p>step 1 app.js 路由配置下，需要添加一句 </p>
 <h4 id="JavaScript-1">JavaScript</h4><pre><code>animateApp.config(<span class="keyword">function</span>(<span class="variable">$routeProvider</span>, <span class="variable">$locationProvider</span>) {
 <span class="variable">$routeProvider</span>
@@ -212,7 +212,7 @@ animateApp.config(<span class="keyword">function</span>(<span class="variable">$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2016/01/19/AngularJS实现路由以及去掉自带的-号/" data-id="cijl2wkaq0000z2s195wqj0ek" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2016/01/19/AngularJS实现路由以及去掉自带的-号/" data-id="cijl2yqyz00000ds1mt72ji0q" class="article-share-link">Share</a>
       
       
     </footer>
