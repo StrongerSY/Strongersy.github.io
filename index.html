@@ -210,7 +210,7 @@ animateApp.config(<span class="keyword">function</span>(<span class="variable">$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2016/01/19/AngularJS实现路由以及去掉自带的-号/" data-id="cijl2uycv0000xxs1bnzqu7mk" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2016/01/19/AngularJS实现路由以及去掉自带的-号/" data-id="cijl2wkaq0000z2s195wqj0ek" class="article-share-link">Share</a>
       
       
     </footer>
@@ -271,14 +271,11 @@ var duoshuoQuery = {short_name:"stronger"};
 <p>然后就找到了 Clipboard.js，最初是从这篇 <a href="http://www.infoq.com/cn/news/2015/10/clipboard-js-no-flash" target="_blank" rel="external">Clipboard.js：不用Flash实现剪贴板功能的轻量级JavaScript库</a>看到的，看到标题我就开心了，终于不用再引用 ZeroClipboard.swf 了。用起来也是非常的顺利，很快就调通了，但是。。。。。。它不支持safari。。。。其他浏览器倒是都可以，不知这插件作者和苹果产品有啥矛盾？问了下我们组长，得到的回答是，再找找吧，实在不行还得问问产品。于是我又开始了尝试。</p>
 <p>有回到了上面白树大神那篇文章，发现了 ZeroClipboard.js 这个插件还没用过，而且这个历史最久，作者也还在维护，所以我就又开始了尝试！这次终于顺利复制成功了。不过也参考了另一篇文章，<a href="http://my.oschina.net/shniu/blog/298406?p=1" target="_blank" rel="external">ZeroClipboard2.0 复制功能</a>。</p>
 <p>代码这篇文章有，我就不贴了，需要注意的是，这几篇文章的小demo 中，插件js 和 flash 文件 ZeroClipboard.swf 以及你自己的调用函数 js 都在同一个目录下，而我们项目中，这几个通常不在一起，这也是可能导致我一直不顺利的原因之一，也就是说我引用的swf 文件找不到。这里提醒一下，我们如果swf 不和我们自己的调用哪个js 文件在同一目录，一定要  像这样配置好，</p>
-<p>####JavaScript</p>
-<pre><code><span class="tag">ZeroClipboard</span><span class="class">.config</span>( <span class="rules">{ <span class="rule"><span class="attribute">swfPath</span>:<span class="value"> <span class="string">"static/js/libs/ZeroClipboard.swf"</span> } )</span></span>;</span>
-</code></pre><p>###总结</p>
-<p>其实 插件 + flash  对比 纯js 插件，来说，各有问题，flash 的支持不是很好，后面可能各大浏览器都不支持，而纯js插件Clipboard.js 对Safari还不支持复制，不过还是提供了优雅降级的方案，因为在safari 下，它默认会选中需要复制的文本，这时候你可以提示用户 ctrl+c 进行复制也可以的。</p>
+<h4 id="JavaScript">JavaScript</h4><pre><code><span class="tag">ZeroClipboard</span><span class="class">.config</span>( <span class="rules">{ <span class="rule"><span class="attribute">swfPath</span>:<span class="value"> <span class="string">"static/js/libs/ZeroClipboard.swf"</span> } )</span></span>;</span>
+</code></pre><h3 id="总结">总结</h3><p>其实 插件 + flash  对比 纯js 插件，来说，各有问题，flash 的支持不是很好，后面可能各大浏览器都不支持，而纯js插件Clipboard.js 对Safari还不支持复制，不过还是提供了优雅降级的方案，因为在safari 下，它默认会选中需要复制的文本，这时候你可以提示用户 ctrl+c 进行复制也可以的。</p>
 <p>之前在做Angular Todolist 项目的时候，遇到一个小问题是，输入框需要敲击回车，触发内容输入，这部分功能Angular 封装在了ng-submit 指令中了。ng-submit 默认的就是敲击回车提交表单。那么我们回到原生JS 如何实现呢，很简单，待我慢慢道来~~</p>
 <p>本文实现了两种小效果，一种是输入框敲击回车，显示输入内容，一个是输入框输入内容，即可同步显示，有点类似Angular 的双向数据绑定</p>
-<p>###参考内容</p>
-<ol>
+<h3 id="参考内容">参考内容</h3><ol>
 <li><a href="http://www.cnblogs.com/PeunZhang/p/3324727.html" target="_blank" rel="external">【原】js实现复制到剪贴板功能，兼容所有浏览器</a></li>
 <li><a href="http://my.oschina.net/shniu/blog/298406?p=1" target="_blank" rel="external">ZeroClipboard2.0 复制功能</a></li>
 <li><a href="http://www.infoq.com/cn/news/2015/10/clipboard-js-no-flash" target="_blank" rel="external">Clipboard.js：不用Flash实现剪贴板功能的轻量级JavaScript库</a></li>
@@ -287,7 +284,7 @@ var duoshuoQuery = {short_name:"stronger"};
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/12/12/网页中实现复制到剪贴板的JavaScript插件/" data-id="cijl2uye80002xxs1ayj9mx12" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/12/12/网页中实现复制到剪贴板的JavaScript插件/" data-id="cijl2wkbr0002z2s1oqy8x5i9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -348,7 +345,7 @@ var duoshuoQuery = {short_name:"stronger"};
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/11/24/hello-world/" data-id="cijl2uyel0007xxs1islcf1yg" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/11/24/hello-world/" data-id="cijl2wkc10007z2s18cmfixkn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -455,7 +452,7 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/11/21/文本框回车输入/" data-id="cijl2uyec0003xxs1m6cnao65" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/11/21/文本框回车输入/" data-id="cijl2wkbu0003z2s11pqxqtbi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -635,7 +632,7 @@ var duoshuoQuery = {short_name:"stronger"};
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/11/06/localStorage介绍和基本使用/" data-id="cijl2uyej0006xxs17dqt2abh" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/11/06/localStorage介绍和基本使用/" data-id="cijl2wkbz0006z2s1mcj9g2r2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -767,7 +764,7 @@ var duoshuoQuery = {short_name:"stronger"};
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/10/25/利用CSS-制作基本三角形及扩展实践/" data-id="cijl2uyef0004xxs1lqokdfix" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/10/25/利用CSS-制作基本三角形及扩展实践/" data-id="cijl2wkbv0004z2s1iqzg0uco" class="article-share-link">Share</a>
       
       
     </footer>
@@ -841,7 +838,7 @@ var duoshuoQuery = {short_name:"stronger"};
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://strongersy.github.io/Blog/2015/10/13/使用Hexo-快速搭建Github个人博客/" data-id="cijl2uyeh0005xxs1etf1tigl" class="article-share-link">Share</a>
+      <a data-url="http://strongersy.github.io/Blog/2015/10/13/使用Hexo-快速搭建Github个人博客/" data-id="cijl2wkbx0005z2s1uzvv779t" class="article-share-link">Share</a>
       
       
     </footer>
