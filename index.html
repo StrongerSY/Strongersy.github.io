@@ -320,26 +320,10 @@
         <p>最近做项目，遇到了一个小功能，需要将网页中的链接地址，点击按钮进行复制，这样用户点击完了，直接粘贴即可使用。刚看到产品提供的UE的时候，我的注意力就集中到了这个功能，主要原因还是因为以前没有实现过，想想真要实现的话，估计还要请教度娘。。。经历了一些波折，总算还是把这个功能借助插件实现了，而且应该还是兼容大部分浏览器的，所以今天就把我折腾的过程进行一个总结，也让看到文章的大家，将来要用这个功能，少走点弯路~~</p>
 <p>总共我经历了三个插件，不过因为复制到剪贴板这功能目前就那么几个插件：</p>
 <ol>
-<li><a href="https://github.com/zeroclipboard/zeroclipboard" target="_blank" rel="external">ZeroClipboard.js</a></li>
+<li><a href="https://github.com/zeroclipboard/zeroclipboard">ZeroClipboard.js</a></li>
 <li>jQuery.ZeroClipboard.js</li>
-<li><a href="http://zenorocha.github.io/clipboard.js/" target="_blank" rel="external">Clipboard.js</a></li>
+<li><a href="http://zenorocha.github.io/clipboard.js/">Clipboard.js</a></li>
 </ol>
-<p>前两个的实现，其实都是基于 插件 + flash 这个组合的，第三个是最近才出的，目的之一可能就是不用flash吧，主要还是flash后面可能很多浏览器支持不太好，比如火狐默认就是不开启flash的。但是这三个插件依然是各自都他的优势的，但我逐个根据自己的实践分析一下。</p>
-<p>我最初搜到了一些文章介绍用JavaScript的原生方法进行复制，但不是跑不通就是浏览器不支持，但原文却说能实现，可控制台老是爆出   XXX 方法undefined， 哎，还是找找插件吧。</p>
-<p>然后就搜到了 <a href="http://www.cnblogs.com/PeunZhang/p/3324727.html" target="_blank" rel="external">【原】js实现复制到剪贴板功能，兼容所有浏览器</a>这篇文章，楼主介绍了前两篇，由于jq 插件用的多，所以我先尝试了，jQuery.ZeroClipboard.js，博主还给了小 demo，demo下来 可以跑通，第一感觉不错，但是，我做的一个表格，一个页面通常好几个要复制，用这个插件就是不行，哎，再百度！！</p>
-<p>然后就找到了 Clipboard.js，最初是从这篇 <a href="http://www.infoq.com/cn/news/2015/10/clipboard-js-no-flash" target="_blank" rel="external">Clipboard.js：不用Flash实现剪贴板功能的轻量级JavaScript库</a>看到的，看到标题我就开心了，终于不用再引用 ZeroClipboard.swf 了。用起来也是非常的顺利，很快就调通了，但是。。。。。。它不支持safari。。。。其他浏览器倒是都可以，不知这插件作者和苹果产品有啥矛盾？问了下我们组长，得到的回答是，再找找吧，实在不行还得问问产品。于是我又开始了尝试。</p>
-<p>有回到了上面白树大神那篇文章，发现了 ZeroClipboard.js 这个插件还没用过，而且这个历史最久，作者也还在维护，所以我就又开始了尝试！这次终于顺利复制成功了。不过也参考了另一篇文章，<a href="http://my.oschina.net/shniu/blog/298406?p=1" target="_blank" rel="external">ZeroClipboard2.0 复制功能</a>。</p>
-<p>代码这篇文章有，我就不贴了，需要注意的是，这几篇文章的小demo 中，插件js 和 flash 文件 ZeroClipboard.swf 以及你自己的调用函数 js 都在同一个目录下，而我们项目中，这几个通常不在一起，这也是可能导致我一直不顺利的原因之一，也就是说我引用的swf 文件找不到。这里提醒一下，我们如果swf 不和我们自己的调用哪个js 文件在同一目录，一定要  像这样配置好，</p>
-<h4 id="JavaScript">JavaScript</h4><pre><code><span class="tag">ZeroClipboard</span><span class="class">.config</span>( <span class="rules">{ <span class="rule"><span class="attribute">swfPath</span>:<span class="value"> <span class="string">"static/js/libs/ZeroClipboard.swf"</span> } )</span></span>;</span>
-</code></pre><h3 id="总结">总结</h3><p>其实 插件 + flash  对比 纯js 插件，来说，各有问题，flash 的支持不是很好，后面可能各大浏览器都不支持，而纯js插件Clipboard.js 对Safari还不支持复制，不过还是提供了优雅降级的方案，因为在safari 下，它默认会选中需要复制的文本，这时候你可以提示用户 ctrl+c 进行复制也可以的。</p>
-<p>之前在做Angular Todolist 项目的时候，遇到一个小问题是，输入框需要敲击回车，触发内容输入，这部分功能Angular 封装在了ng-submit 指令中了。ng-submit 默认的就是敲击回车提交表单。那么我们回到原生JS 如何实现呢，很简单，待我慢慢道来~~</p>
-<p>本文实现了两种小效果，一种是输入框敲击回车，显示输入内容，一个是输入框输入内容，即可同步显示，有点类似Angular 的双向数据绑定</p>
-<h3 id="参考内容">参考内容</h3><ol>
-<li><a href="http://www.cnblogs.com/PeunZhang/p/3324727.html" target="_blank" rel="external">【原】js实现复制到剪贴板功能，兼容所有浏览器</a></li>
-<li><a href="http://my.oschina.net/shniu/blog/298406?p=1" target="_blank" rel="external">ZeroClipboard2.0 复制功能</a></li>
-<li><a href="http://www.infoq.com/cn/news/2015/10/clipboard-js-no-flash" target="_blank" rel="external">Clipboard.js：不用Flash实现剪贴板功能的轻量级JavaScript库</a></li>
-</ol>
-
       
     </div>
     
@@ -349,66 +333,9 @@
       
 
       
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/24/hello-world/" class="article-date">
-  	<time datetime="2015-11-24T07:46:45.000Z" itemprop="datePublished">2015-11-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/24/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
+        <p class="article-more-link">
+          <a  href="/2015/12/12/网页中实现复制到剪贴板的JavaScript插件/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -476,38 +403,6 @@
     <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">8px</span></span></span>;
 }</span>
 </code></pre><p>代码非常的简单，这就是一个小的demo。接下来来到了JavaScript部分</p>
-<h4 id="JavaScript">JavaScript</h4><pre><code><span class="keyword">var</span> input = <span class="built_in">document</span>.querySelector(<span class="string">".type"</span>);
-<span class="keyword">var</span> show = <span class="built_in">document</span>.querySelector(<span class="string">".show"</span>);
-input.addEventListener(<span class="string">"keydown"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>{
-
-    <span class="keyword">if</span>(e.keyCode == <span class="number">13</span>){
-        <span class="keyword">var</span> content = <span class="keyword">this</span>.value;
-        show.innerHTML = content;
-    }
-})
-    input.addEventListener(<span class="string">"keyup"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-    <span class="keyword">var</span> content = <span class="keyword">this</span>.value;
-    <span class="keyword">if</span>(content === <span class="string">""</span>){
-        show.innerHTML = <span class="string">""</span>;
-    }
-});
-<span class="keyword">var</span> inputAgain = <span class="built_in">document</span>.querySelector(<span class="string">".type1"</span>);
-<span class="keyword">var</span> show1 = <span class="built_in">document</span>.querySelector(<span class="string">".show1"</span>);
-inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-    <span class="keyword">var</span> contents = <span class="keyword">this</span>.value;
-    show1.innerHTML = contents
-})
-</code></pre><p>敲击回车，只需判断事件绑定时候的  e 对象的 keyCode 属性值，即可获得用户敲击的是哪个按键，而 13 正好对应回车，从而就完成了这个效果。</p>
-<p>第二个demo 内容随着敲击实时显示， 是利用了 JavaScript 事件中的 keyup 事件。此事件针对的就是输入内容时候，用户只要敲击完成，放松按键，就会触发这个事件。所以我们在这个事件绑定一个函数，就可以用户输入完一个内容，放松按键，立刻取得这个值，然后显示出来即可。</p>
-<h3 id="第二个知识点">第二个知识点</h3><p>这里用到的点实际只需加一个敲击按键为回车即可，不过这只是，本文关注的知识点之一，还有一个点也平时容易忽略。我们看上面的JavaScript 代码能发现，获取文本框输入内容的饿时候，我们使用的是  输入框的 dom 元素的 .value 属性。其实最开始，我使用的是 getAttribute 方法，以为用这个方法可以获取。但一直显示 null，令我有些不解，百度了下，换为 .value 就可以。 接下来，。。。</p>
-<p>问题描述完了，我的demo 是实现了，但是  .value 和 getAtttribue 什么区别呢 ？</p>
-<h4 id="-value">.value</h4><p>此君获取的是，输入框 dom 对象value 属性的实时值，即 你最初设定的值如果有改变，他也能得到最新值</p>
-<h4 id="getAttribute">getAttribute</h4><p>它从名称看，取得的是 dom 对象的 value 属性，遗憾的是，它只能得到页面渲染后，DOM对象最初的值，那么上面的demo 最初未设置初始值，自然，我开始使用getAttribute 方法得到的是，null 了。</p>
-<h3 id="参考内容">参考内容</h3><p>在这里加上百度到的 dom.value 和 dom.getAttribute 的区别的回答，仅供参考</p>
-<ol>
-<li>[<a href="http://stackoverflow.com/questions/17494432/javascript-element-value-vs-element-getattributevalue)---stackoverflow" target="_blank" rel="external">http://stackoverflow.com/questions/17494432/javascript-element-value-vs-element-getattributevalue)---stackoverflow</a></li>
-</ol>
-
       
     </div>
     
@@ -516,6 +411,10 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
       
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/21/文本框回车输入/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -563,131 +462,6 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
 <h3 id="为什么要用localStorage">为什么要用localStorage</h3><h4 id="功能实现方面的原因">功能实现方面的原因</h4><p>TodoList 一个功能是，需要把之前的记录也能显示出来，由于页面刷新，以及关闭浏览器等原因，我们自己的js 存储的数据肯定会丢失，从后端获取又要重新请求数据，这里前端自己就可以“自给自足”~ 即，使用浏览器本地存储。</p>
 <h4 id="为什么不是cookie">为什么不是cookie</h4><p>提到比较流传广泛的本地存储，第一个想到的肯定不是 localStorage,而是cookie。这里参考了不少网络上牛人的文章，在末尾会有参考索引供大家查看，介绍的比我详细。cookie的优点就是应用广泛，所有浏览器都能实现—来自张鑫旭大神的博客，我没验证过~，但不足是容量比较小—-4kb,而且，读取和存储还要自己来，当然网上方法一大堆。</p>
 <p>localStorage 有5M大小，而且IE8 都支持了，也不错，而且自身提供了读取存储和删除的方法，使用起来较为方便。</p>
-<h3 id="具体使用介绍">具体使用介绍</h3><p>这部分我们按照js实现方法来介绍，分为 原生 JavaScript, jQuery, AngularJS。<br>这里有一点非常值得注意，就是localStorage存储数据的时候，不论数据原来是什么格式，统一存储为字符串。所以我们读取数据的时候，需要自己进行数据解析，将他解析为我们想要用的格式。</p>
-<ul>
-<li>删除</li>
-</ul>
-<pre>
-    localStorage.removeItem("store");
-</pre>
-
-<ul>
-<li>读取</li>
-</ul>
-<pre>
-    localStorage.getItem("store");
-</pre>
-
-<ul>
-<li>存储</li>
-</ul>
-<pre>
-    localStorage.setItem("store",data);
-</pre>
-
-<p>接下来主要介绍各种方式实现的对数据的转换，从而利用localStorage。</p>
-<h4 id="原生JavaScript">原生JavaScript</h4><ul>
-<li>读取数据</li>
-</ul>
-<pre>
-    var store = localStorage.getItem("store");
-    var data = store.split(",");
-    var i,len = data.length;
-    for(i = 0; i < len; i++){
-        #操作数据
-    }
-</pre>
-
-<ul>
-<li>存储数据</li>
-</ul>
-<p>这里就是给localStorage 添加一个属性值,这部分来<a href="http://www.cnblogs.com/xiaowei0705/archive/2011/04/19/2021372.html" target="_blank" rel="external">博客园 xiaowei0705 的博客</a>。<br>这里突然有了一个疑问，为什么还需要用Jquery AngularJS 在存储数据的时候，进行转换呢？</p>
-<pre>
-    localStorage.a = 3;//设置a为"3"
-    localStorage["a"] = "sfsf";//设置a为"sfsf"，覆盖上面的值
-    localStorage.setItem("b","isaac");//设置b为"isaac"
-</pre>
-
-<h3 id="jQuery">jQuery</h3><ul>
-<li>读取数据</li>
-</ul>
-<pre>
-    var store = localStorage.getItem("store");
-    var data = JSON.parse(store);
-</pre>
-
-<ul>
-<li>存储数据</li>
-</ul>
-<pre>
-    var store = JSON.Stringify(data);
-    localStorage.setItem("store",store);
-</pre>
-
-<h3 id="AngularJS">AngularJS</h3><ul>
-<li>读取数据</li>
-</ul>
-<pre>
-    var store = localStorage.getItem("store");
-    var data = angular.fromJson(store);
-</pre>
-
-<ul>
-<li>存储数据</li>
-</ul>
-<pre>
-    var store = Angular.toJson(data);
-    localStorage.setItem("store",store);
-</pre>
-
-<h3 id="demo">demo</h3><p>做了一个小demo,也是参考<a href="http://www.cnblogs.com/xiaowei0705/archive/2011/04/19/2021372.html" target="_blank" rel="external">博客园 xiaowei0705 的博客</a>。主要就是实现了点击按钮就记录当期页面访问次数，如果不点击就不会记录，算是对localStorage 使用练习。</p>
-<h4 id="Html">Html</h4><pre><code><span class="tag">&lt;<span class="title">h3</span>&gt;</span>2.Html5 localStorage 实现本地存储<span class="tag">&lt;/<span class="title">h3</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"localStorage"</span>&gt;</span>您已经第<span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"localStorage-time"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>次来到这个页面了~~<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"color-red"</span>&gt;</span>点击按钮可以存储访问次数到本地浏览器，否则不会记录访问次数<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"storeStorage"</span>&gt;</span>存储数据<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</code></pre><h4 id="JavaScript">JavaScript</h4><pre>
-
-    $(document).ready(function(){
-        var demo = {};
-        demo.localStorage = function (){
-            var times;
-            console.log(localStorage.getItem("loadTime"));
-            if(!localStorage.getItem("loadTime")){
-                times = 0;
-            }else{
-                times = parseInt(localStorage.getItem("loadTime"));
-            }
-            console.log(times);
-            times += 1;
-            $(".storeStorage").attr("storeTimes",times);
-            $(".localStorage-time").html(times);
-
-        }
-        demo.localStorage();
-
-        demo.saveStorage = function (){
-            localStorage.setItem("loadTime",$(".storeStorage").attr("storeTimes"));
-        }
-
-        $(".storeStorage").on('click', demo.saveStorage);
-        })
-    }
-
-</pre>
-
-
-<p>最后我们看到的效果，就如下图所示：</p>
-<p><img src="http://ww3.sinaimg.cn/mw690/69eb024ejw1exrdz11bowj21kw0kkn1g.jpg" alt=""></p>
-<h3 id="结尾">结尾</h3><p>自己之前没用过localStorage，第一次用肯定有疏漏和不对的地方，本文内容大部分来自对参考文献中文章的总结，以及一点自己的思考，请大家看到这篇博文的带着批判的眼光来对待，同时多参考其他靠谱的内容，也可以看我后面列出的，我参考的文章，质量都非常的过硬，我们一起向他们认真严谨的态度学习~~~同时，对我博文的问题，欢迎大家提出宝贵意见。</p>
-<h4 id="参考文献">参考文献</h4><ol>
-<li><a href="http://www.zhangxinxu.com/wordpress/2011/09/html5-localstorage%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B/" target="_blank" rel="external">HTML5 localStorage本地存储实际应用举例</a>—张鑫旭大神博客</li>
-<li><a href="http://www.cnblogs.com/xiaowei0705/archive/2011/04/19/2021372.html" target="_blank" rel="external">HTML5 LocalStorage 本地存储</a>—博客园xiaowei0705的博客，介绍的非常详细，还有实例</li>
-<li><a href="http://www.cnblogs.com/yexiaochai/p/4509472.html" target="_blank" rel="external">HTML5本地存储Localstorage</a>—博客园叶小钗，demo 很牛。以后还要再来学习。</li>
-<li><a href="http://www.cnblogs.com/lhb25/p/store-js-for-localstorage.html" target="_blank" rel="external">store.js - 轻松实现本地存储（LocalStorage）</a>—一个本地存储的插件，看着很好用，还没尝试。</li>
-</ol>
-
       
     </div>
     
@@ -696,6 +470,10 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
       
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/06/localStorage介绍和基本使用/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -796,30 +574,6 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
     }
 
 </pre>
-
-<p>最后我们看到的效果，就如下图所示：</p>
-<p><img src="http://ww1.sinaimg.cn/mw690/69eb024egw1exh6k94tyyj21kw0u2tg9.jpg" alt="css制作基本三角形"></p>
-<p>分析一下，她的实现思想，我们就可以在后面很容易实现它，甚至做出其他的三角形，以及更丰富的样式。我们以上三角形为例子：</p>
-<p>这个三角形之所以形成，完全依赖于我们的 div 元素没有宽度高度，只是完全依赖于元素的border 属性来实现的。所以第一点就是：</p>
-<ol>
-<li>实现三角形的元素宽度和高度设置为0</li>
-</ol>
-<p>然后就是border属性的使用，我们审查元素，发现，这个三角形，高度其实是由border-bottm 这个属性的100px实现的，而宽度则是200px，很简单border－left 与border－right 的10px 相加得到的，那么我们在console 中去修改border-left 属性的值，会发现三角形的形状也随之变化，由此我们得出第二点：</p>
-<ol>
-<li>高度有对边实现，也就是我实现上三角形，border-left border-right 决定三角形宽度， 并不决定颜色，设置为transparent，而三角形的高度由对边撑开，还要设置颜色。 </li>
-</ol>
-<p>由此扩展开，我们可以通过如下制作左右直角三角形，由于border 默认宽度为 0，所以我们不设置其中左边，即可得到左直角三角形</p>
-<pre>
-    .triangle-leftstraight{
-        width: 0;
-        height: 0;
-        border-right: 100px solid transparent;
-        border-bottom: 100px solid red; 
-    }
-</pre>
-
-
-
       
     </div>
     
@@ -828,6 +582,10 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
       
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/10/25/利用CSS-制作基本三角形及扩展实践/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

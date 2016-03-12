@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Again = a gain">
 <meta property="og:description" content="之前在做Angular Todolist 项目的时候，遇到一个小问题是，输入框需要敲击回车，触发内容输入，这部分功能Angular 封装在了ng-submit 指令中了。ng-submit 默认的就是敲击回车提交表单。那么我们回到原生JS 如何实现呢，很简单，待我慢慢道来~~
 本文实现了两种小效果，一种是输入框敲击回车，显示输入内容，一个是输入框输入内容，即可同步显示，有点类似Angular 的双">
-<meta property="og:updated_time" content="2015-11-21T10:42:44.000Z">
+<meta property="og:updated_time" content="2016-03-12T10:47:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文本框回车输入">
 <meta name="twitter:description" content="之前在做Angular Todolist 项目的时候，遇到一个小问题是，输入框需要敲击回车，触发内容输入，这部分功能Angular 封装在了ng-submit 指令中了。ng-submit 默认的就是敲击回车提交表单。那么我们回到原生JS 如何实现呢，很简单，待我慢慢道来~~
@@ -261,6 +261,7 @@
     <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">8px</span></span></span>;
 }</span>
 </code></pre><p>代码非常的简单，这就是一个小的demo。接下来来到了JavaScript部分</p>
+<a id="more"></a>
 <h4 id="JavaScript">JavaScript</h4><pre><code><span class="keyword">var</span> input = <span class="built_in">document</span>.querySelector(<span class="string">".type"</span>);
 <span class="keyword">var</span> show = <span class="built_in">document</span>.querySelector(<span class="string">".show"</span>);
 input.addEventListener(<span class="string">"keydown"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>{
@@ -301,11 +302,11 @@ inputAgain.addEventListener(<span class="string">"keyup"</span>,<span class="fun
     
 <nav id="article-nav">
   
-    <a href="/2015/11/24/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/12/12/网页中实现复制到剪贴板的JavaScript插件/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Hello World
+          网页中实现复制到剪贴板的JavaScript插件
         
       </div>
     </a>
