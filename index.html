@@ -233,7 +233,7 @@
 <h3 id="实现AngularJS路由">实现AngularJS路由</h3><p>AngularJS 路由部分有两种实现方法，一种是基于本身的 ngRoute，另外一种是使用 ui-router ，第二种我们后面介绍，今天的都是基于 ngRoute。</p>
 <p>step 1 先来个基础页面</p>
 <p>AngularJS比较适合做单页面应用，我所理解的单页面应用，就是一个项目的所有页面和功能实际都在一个页面展示，那么页面之间的逻辑，AngularJS提供了路由来实现跳转，一般之前用jQuery则是将当前需要的部分展示，其他部分暂时隐藏，等到需要切换的时候，再去设置显示隐藏，以及事件绑定等步骤。</p>
-<p>那么这里的基础页面，实际上就是把各个页面的内容，填充进来的一个容器，我们展示给用户的，一直都是这个基础页面。AngularJS中，我们可以通过为标签添加 ng-view 属性来实现，如 <div ng-view=""></div> 或者 <ng-view></ng-view>。我们在基本页面中，需要引入  angular.js, angular.route.js文件。除了作为AngularJS 标记的ng-app声明，还需要一个容器来加载其他的页面，那么index.html 的代码如下：</p>
+<p>那么这里的基础页面，实际上就是把各个页面的内容，填充进来的一个容器，我们展示给用户的，一直都是这个基础页面。AngularJS中，我们可以通过为标签添加 ng-view 属性来实现，如 <div ng-view></div> 或者 <ng-view></ng-view>。我们在基本页面中，需要引入  angular.js, angular.route.js文件。除了作为AngularJS 标记的ng-app声明，还需要一个容器来加载其他的页面，那么index.html 的代码如下：</p>
 <h4 id="HTML">HTML</h4><pre><code><span class="doctype">&lt;!DOCTYPE html&gt;</span>
 <span class="tag">&lt;<span class="title">html</span>&gt;</span>
 <span class="tag">&lt;<span class="title">head</span>&gt;</span>
@@ -261,91 +261,7 @@
 
 <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">html</span>&gt;</span>
-</code></pre><p>step 2 定义路由表</p>
-<p>在app.js 中，使用AngularJS提供的 $routeProvider，我是用这个服务，需要先引入。<br>他又两个方法，when (当有匹配地址的时候，如何跳转) 和 otherwise（当地址都不匹配的时候，如何跳转）</p>
-<p>when(path,route)方法接收两个参数，path是一个string类型，表示该条路由规则所匹配的路径，它将与地址栏的内容($location.path)值进行匹配。如果需要匹配参数，可以在path中使用冒号加名称的方式，如：path为/show/:name，如果地址栏是/show/tom，那么参数name和所对应的值tom便会被保存在$routeParams中，像这样：{name : tom}。我们也可以用<em>进行模糊匹配，如：/show</em>/:name将匹配/showInfo/tom。—- 引用自 吕大豹博客园博客 <a href="http://www.cnblogs.com/lvdabao/p/3481224.html" target="_blank" rel="external">走进AngularJs(八) ng的路由机制</a>。这部分的使用我还不是很透彻，所以直接用了人家的介绍，还要在以后的使用中慢慢理解。</p>
-<p>这部分涉及的参数并不多，具体代码，如下：</p>
-<h4 id="JavaScript">JavaScript</h4><pre><code>var animateApp = angular.module(<span class="string">'animateApp'</span>, [<span class="string">'ngRoute'</span>]);
-
-animateApp.config(<span class="keyword">function</span>(<span class="variable">$routeProvider</span>, <span class="variable">$locationProvider</span>) {
-  <span class="variable">$routeProvider</span>
-
-    .when(<span class="string">'/'</span>, {
-      templateUrl: <span class="string">'page-home.html'</span>,
-      controller: <span class="string">'mainController'</span>
-    })
-    // home page
-    // .when(<span class="string">'/home'</span>, {
-    //   templateUrl: <span class="string">'page-home.html'</span>,
-    //   controller: <span class="string">'mainController'</span>
-    // })
-
-    // about page
-    .when(<span class="string">'/about'</span>, {
-      templateUrl: <span class="string">'page-about.html'</span>,
-      controller: <span class="string">'aboutController'</span>
-    })
-
-    // contact page
-    .when(<span class="string">'/contact'</span>, {
-      templateUrl: <span class="string">'page-contact.html'</span>,
-      controller: <span class="string">'contactController'</span>
-    })
-
-    // otherwise
-    .otherwise({
-      redirectTo: <span class="string">"/"</span>
-    });
-});
-</code></pre><p>需要注意ngRoute 的引入！！</p>
-<p>step 3 其他的子页面</p>
-<p>然后，我们就需要建立其他需要的子页面，这部分还要注意页面的路径要和 配置的路由表中保持一致！！</p>
-<p>具体代码，我这部分是参考的 <a href="https://scotch.io/tutorials/animating-angularjs-apps-ngview" target="_blank" rel="external">Animating AngularJS Apps: ngView</a>。这部分还添加了 ngAnimate 部分实现页面切换的动画效果，其实，这因为， ng-view支持ngAnimate,<br>当切换子页面的时候，会自动添加 ng-enter ，ng-leave 类，来显示和隐藏页面！我们需要做的就是，引入 angular.animate.js 以及设置css 动画效果的类即可！！</p>
-<h3 id="去掉url中的_‘#’">去掉url中的 ‘#’</h3><p>AngularJS 默认使用路由会添加# 在地址栏！需要引入服务 $localProvider</p>
-<p>step 1 app.js 路由配置下，需要添加一句 </p>
-<h4 id="JavaScript-1">JavaScript</h4><pre><code>animateApp.config(<span class="keyword">function</span>(<span class="variable">$routeProvider</span>, <span class="variable">$locationProvider</span>) {
-<span class="variable">$routeProvider</span>
-
-  .when(<span class="string">'/'</span>, {
-    templateUrl: <span class="string">'page-home.html'</span>,
-    controller: <span class="string">'mainController'</span>
-  })
-  // home page
-  // .when(<span class="string">'/home'</span>, {
-  //   templateUrl: <span class="string">'page-home.html'</span>,
-  //   controller: <span class="string">'mainController'</span>
-  // })
-
-  // about page
-  .when(<span class="string">'/about'</span>, {
-    templateUrl: <span class="string">'page-about.html'</span>,
-    controller: <span class="string">'aboutController'</span>
-  })
-
-  // contact page
-  .when(<span class="string">'/contact'</span>, {
-    templateUrl: <span class="string">'page-contact.html'</span>,
-    controller: <span class="string">'contactController'</span>
-  })
-
-  // otherwise
-  .otherwise({
-    redirectTo: <span class="string">"/"</span>
-  });
-
-  // use the HTML5 History API
-  <span class="variable">$locationProvider</span>.html5Mode(true);
-});
-</code></pre><p>step 2 在我们的基础页面 之前添加一句 <base href="/">。这里要注意的是href里面的地址，需要相对你自己的项目目录！！</p>
-<h3 id="总结">总结</h3><p>总算是记录了一下自己的经历，可以看到，我现在只是大致知道如何去使用了，原理就别提了！<br>还要在今后的使用中，去学习和体会！！</p>
-<p>还有，我要坚持写博客哦！把自己学习到的东西，进行谨慎的思考，然后再总结出来分享给大家！！</p>
-<h3 id="参考内容">参考内容</h3><ol>
-<li><a href="https://scotch.io/tutorials/animating-angularjs-apps-ngview" target="_blank" rel="external">Animating AngularJS Apps: ngView</a></li>
-<li><a href="http://www.cnblogs.com/lvdabao/p/3481224.html" target="_blank" rel="external">走进AngularJs(八) ng的路由机制</a></li>
-<li><a href="http://blog.fens.me/angularjs-url/" target="_blank" rel="external">AngularJS去掉的URL里的#号</a></li>
-<li><a href="http://www.oschina.net/translate/pretty-urls-in-angularjs-removing-the-hashtag" target="_blank" rel="external">AngularJS 中的友好 URL —— 移除URL 中的 #</a></li>
-</ol>
-
+</code></pre>
       
     </div>
     
@@ -354,6 +270,10 @@ animateApp.config(<span class="keyword">function</span>(<span class="variable">$
       
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/01/19/AngularJS实现路由以及去掉自带的-号/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
