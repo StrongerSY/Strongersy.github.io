@@ -14,7 +14,7 @@ PS: 这部分一定要放到 服务器下">
 <meta property="og:site_name" content="Again = a gain">
 <meta property="og:description" content="学习AngularJS又中断了一段时间，因为。。。。。年底忙啊！！！自己懒啊！！！！算了，纠结这些都无果，不如，来个重新开始！昨天看了下AngularJS的路由部分，网上搜索的文章讲的都非常详细，所以，我这一片就来讲讲自己是如何一步一步是实现的吧！至于原理部分，我会分享几篇我参考的博文教程的！所以，我们今天主要讲讲实现，哎，原理等着深入了再去琢磨吧~先会用再说！
 PS: 这部分一定要放到 服务器下">
-<meta property="og:updated_time" content="2016-03-12T10:35:01.000Z">
+<meta property="og:updated_time" content="2016-03-12T10:37:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS实现路由以及去掉自带的#号">
 <meta name="twitter:description" content="学习AngularJS又中断了一段时间，因为。。。。。年底忙啊！！！自己懒啊！！！！算了，纠结这些都无果，不如，来个重新开始！昨天看了下AngularJS的路由部分，网上搜索的文章讲的都非常详细，所以，我这一片就来讲讲自己是如何一步一步是实现的吧！至于原理部分，我会分享几篇我参考的博文教程的！所以，我们今天主要讲讲实现，哎，原理等着深入了再去琢磨吧~先会用再说！
@@ -170,8 +170,7 @@ PS: 这部分一定要放到 服务器下">
 
 <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">html</span>&gt;</span>
-</code></pre><a id="more"></a>
-<p>step 2 定义路由表</p>
+</code></pre><p>step 2 定义路由表</p>
 <p>在app.js 中，使用AngularJS提供的 $routeProvider，我是用这个服务，需要先引入。<br>他又两个方法，when (当有匹配地址的时候，如何跳转) 和 otherwise（当地址都不匹配的时候，如何跳转）</p>
 <p>when(path,route)方法接收两个参数，path是一个string类型，表示该条路由规则所匹配的路径，它将与地址栏的内容($location.path)值进行匹配。如果需要匹配参数，可以在path中使用冒号加名称的方式，如：path为/show/:name，如果地址栏是/show/tom，那么参数name和所对应的值tom便会被保存在$routeParams中，像这样：{name : tom}。我们也可以用<em>进行模糊匹配，如：/show</em>/:name将匹配/showInfo/tom。—- 引用自 吕大豹博客园博客 <a href="http://www.cnblogs.com/lvdabao/p/3481224.html" target="_blank" rel="external">走进AngularJs(八) ng的路由机制</a>。这部分的使用我还不是很透彻，所以直接用了人家的介绍，还要在以后的使用中慢慢理解。</p>
 <p>这部分涉及的参数并不多，具体代码，如下：</p>
