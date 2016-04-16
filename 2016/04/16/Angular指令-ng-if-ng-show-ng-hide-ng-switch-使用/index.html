@@ -6,28 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Angular指令 ng-if, ng-show/ng-hide, ng-switch 使用 | Again = a gain</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="开头最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下ng-if,ng-show/ng-hide,ng-switch 这几个指令。
+  <meta name="description" content="开头最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下 ng-if,ng-show/ng-hide,ng-switch 这几个指令。
 共性
-这里个指令都是Angular框架提供给我们的设置页面内容显示和隐藏的方法，使用起来非常方便，尤其是做业务逻辑。
-
-都">
+这里个指令都是Angular框架提供给我们的设置页面内容显示和隐藏的方法，使用起来非常方便，尤其是做业务逻辑。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angular指令 ng-if, ng-show/ng-hide, ng-switch 使用">
 <meta property="og:url" content="http://strongersy.github.io/2016/04/16/Angular指令-ng-if-ng-show-ng-hide-ng-switch-使用/index.html">
 <meta property="og:site_name" content="Again = a gain">
-<meta property="og:description" content="开头最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下ng-if,ng-show/ng-hide,ng-switch 这几个指令。
+<meta property="og:description" content="开头最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下 ng-if,ng-show/ng-hide,ng-switch 这几个指令。
 共性
-这里个指令都是Angular框架提供给我们的设置页面内容显示和隐藏的方法，使用起来非常方便，尤其是做业务逻辑。
-
-都">
-<meta property="og:updated_time" content="2016-04-16T04:54:27.000Z">
+这里个指令都是Angular框架提供给我们的设置页面内容显示和隐藏的方法，使用起来非常方便，尤其是做业务逻辑。">
+<meta property="og:updated_time" content="2016-04-16T05:01:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Angular指令 ng-if, ng-show/ng-hide, ng-switch 使用">
-<meta name="twitter:description" content="开头最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下ng-if,ng-show/ng-hide,ng-switch 这几个指令。
+<meta name="twitter:description" content="开头最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下 ng-if,ng-show/ng-hide,ng-switch 这几个指令。
 共性
-这里个指令都是Angular框架提供给我们的设置页面内容显示和隐藏的方法，使用起来非常方便，尤其是做业务逻辑。
-
-都">
+这里个指令都是Angular框架提供给我们的设置页面内容显示和隐藏的方法，使用起来非常方便，尤其是做业务逻辑。">
   
     <link rel="alternative" href="/atom.xml" title="Again = a gain" type="application/atom+xml">
   
@@ -250,7 +244,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="开头">开头</h2><p>最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下ng-if,ng-show/ng-hide,ng-switch 这几个指令。</p>
+        <h2 id="开头">开头</h2><p>最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下 ng-if,ng-show/ng-hide,ng-switch 这几个指令。</p>
 <h2 id="共性">共性</h2><ol>
 <li><p>这里个指令都是Angular框架提供给我们的设置页面内容显示和隐藏的方法，使用起来非常方便，尤其是做业务逻辑。</p>
 </li>
@@ -273,9 +267,9 @@
 </code></pre><p>也可以是直接使用 true / false</p>
 <pre><code>&lt;<span class="keyword">div</span> ng-<span class="keyword">if</span>='<span class="constant">true</span>'&gt;&lt;/<span class="keyword">div</span>&gt;
 </code></pre><p>对于变量，我们在js 中直接设置这个值就可以。</p>
-<p>这是一个能帮我们节省效率的指令，如果表达式值 === false , 则这部分不会在dom中渲染，或者原有的内容会被从dom中删除。所以如果有一部分内容，不需要一开始就显示，我们可以先用ng-if 让它隐藏。例如一个显示更多的下拉按钮，刚开始不显示的部分，可以ng-if 来设置，等我们点击了更多按钮，再设置ng-if = true 既可。这样子减少了页面渲染事件，提高了效率呢。</p>
+<p>这是一个能帮我们节省效率的指令，如果表达式值 === false , 则这部分不会在dom中渲染，或者原有的内容会被从dom中删除。所以如果有一部分内容，不需要一开始就显示，我们可以先用ng-if 让它隐藏。例如一个显示更多的下拉按钮，刚开始不显示的部分，可以ng-if 来设置，等我们点击了更多按钮，再设置 ng-if = true 既可。这样子减少了页面渲染事件，提高了效率呢。</p>
 <p>还有一个特性，ng-if 或创建自己的 scope，它通过原型继承父级的scope。一个典型的例子来自于参考资源1。</p>
-<p>还有一个小坑，$scope上面我可以直接给一个属性赋值如：</p>
+<p>还有一个小坑，$scope 上面我可以直接给一个属性赋值如：</p>
 <pre><code><span class="variable">$scope</span>.showpage = <span class="string">'abut'</span>
 </code></pre><p>但是如果直接赋值一个对象，对不起，需要先声明，再给对象添加属性</p>
 <pre><code><span class="variable">$scope</span>.data = {};
@@ -289,7 +283,7 @@
     &lt;<span class="operator">div</span> ng-<span class="keyword">switch</span>-<span class="operator">with</span>=<span class="string">'about'</span>&gt;&lt;/<span class="operator">div</span>&gt;
     &lt;<span class="operator">div</span> ng-<span class="keyword">switch</span>-<span class="operator">with</span>=<span class="string">'contact'</span>&gt;&lt;/<span class="operator">div</span>&gt;
 &lt;/<span class="operator">div</span>&gt;
-</code></pre><p>这也是一个能帮我们节省效率的指令。和ng-if 一样，一开始如果不等于父级的 ng-switch 表达式的值，则不会在页面渲染的，而且我们也可以通过 ng-switch-default 来设置默认的显示部分。比如以往常见的 Tab 选项卡，用这个指令实现起来就非常的容易。</p>
+</code></pre><p>这也是一个能帮我们节省效率的指令。和 ng-if 一样，一开始如果不等于父级的 ng-switch 表达式的值，则不会在页面渲染的，而且我们也可以通过 ng-switch-default 来设置默认的显示部分。比如以往常见的 Tab 选项卡，用这个指令实现起来就非常的容易。</p>
 <p>这里有一点疑问，因为我在项目中，做的单页面应用，所有不同部分都在一个页面里面。那么我经常需要根据不同的ajax返回值，显示不同的部分，（特殊原因不能使用路由），所以我这里就是用的 ng-switch 指令，根据不同返回值，显示不同部分。虽然也能实现按需显示，但看到有文章说这样使用 ng-switch 并不是很妥当，路过的朋友，有了解的可以指点我一下！我在这先谢过了~~</p>
 <p>后面我会继续分享Angular在项目开发中的经验，以及遇到的坑！</p>
 <p>参考资料中回答的非常精彩，也有实例，有兴趣也可以看下！</p>

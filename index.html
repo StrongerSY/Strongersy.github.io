@@ -234,14 +234,14 @@
       
         <p>最近做Angular 项目，经常遇到的一个问题是控制器之间的通信问题。这篇文章打算总结一下这部分的使用经验，有借鉴别人的部分，也有自己的总结，我会尽量说的明白些~如果我的理解有纰漏，请帮忙之处，谢谢。</p>
 <h3 id="问题背景">问题背景</h3><p>我最开始写功能的时候，只是定义了一个 mainController，就只有这一个控制器。由于是一个单页面应用，所以也比较ok，各种功能的实现也没啥大的问题。但是随着代码的深入，我老是觉得把所有东西都写到$scope上面很不妥，这会导致 $scope 越来越臃肿，而且命名也是个问题，万一不小心名字重复覆盖了呢？接下来说下我用到的解决方案。。。</p>
-<h4 id="第一种解决方案">第一种解决方案</h4><p>很简单，就是我在$scope下面创建了几个不同的对象，比如$scope.data 就用来存放用到的公共数据，$scope.global 就是使用的一些公共方法。这样倒是可行，但他们两个对象后面也会变得比较臃肿，感觉这并不是什么可靠的方式。</p>
+<h4 id="第一种解决方案">第一种解决方案</h4><p>很简单，就是我在 $scope下面创建了几个不同的对象，比如 $scope.data 就用来存放用到的公共数据，$scope.global 就是使用的一些公共方法。这样倒是可行，但他们两个对象后面也会变得比较臃肿，感觉这并不是什么可靠的方式。</p>
 <h4 id="第二种">第二种</h4><p>这个时候问了下我们组长，他的建议是mainController下面，再让我自己去分几个controller。这倒是提醒了我，于是我重新组织了页面，划分了各个不同的模块，每一个模块对应一个controller。比如购买页面主体部分有promoteController 和 payController，侧边栏是sidebarController等等。每个controller 就负责自己那部分的页面渲染和事件绑定。</p>
 <p>这样分割模块下来感觉整体清晰了很多，不再想之前咋样各个部分的代码逻辑都杂糅在一起。这就是模块化编程的一种优势吧。</p>
 <p>综上，我最终选择了分模块，设置控制器这样一种方式，然后他们上层有一个主模块，整体控制的方式。这样就出现本文涉及的主要问题，控制器之间如何通信。。。。</p>
 <h3 id="问题的出现">问题的出现</h3><p>项目中这样一个小功能，点开一个小三角，弹出提示信息框，再点，就关闭这个提示框！相信前端朋友们很多都做过这个小效果，很简单。但是还有功能，就是除了这个小三角之外的地方，如果触发了点击事件，而且提示框在显示的话，要关闭这个提示框。再说下我的解决方案。。。</p>
-<h4 id="控制器继承方式">控制器继承方式</h4><p>我把小弹窗的处理函数比如 A()，定义到 mainController，然后如果小三角点击事件触发，则在相应的子控制器中，出发A()。因为子控制器是可以继承得到mainController的方法，<br>所以可以子控制可以直接调用。</p>
+<h4 id="控制器继承方式">控制器继承方式</h4><p>我把小弹窗的处理函数比如 A()，定义到 mainController，然后如果小三角点击事件触发，则在相应的子控制器中，出发A()。因为子控制器是可以继承得到 mainController 的方法，<br>所以可以子控制可以直接调用。</p>
 <p>但是这种方式给我感觉有些混乱，最主要的还是，这应该是子控制器自己的方法，不应该上升到 mainController。</p>
-<h4 id="基于事件的方式">基于事件的方式</h4><p>Angular 中提供了$on,$broadcast,$emit 这几种方式，我当时也是主要参考了后面列出的几篇文章。一使用还是很容易就实现了。</p>
+<h4 id="基于事件的方式">基于事件的方式</h4><p>Angular 中提供了 $on, $broadcast, $emit 这几种方式，我当时也是主要参考了后面列出的几篇文章。一使用还是很容易就实现了。</p>
 <p>通过这种方式，我把提示框显示留在了子控制器。具体实现代码类似：</p>
 <h6 id="mainController_直接调用">mainController 直接调用</h6><pre><code><span class="variable">$broadcast</span>( <span class="string">'closeTip'</span> );
 </code></pre><h5 id="子控制器接收">子控制器接收</h5><pre><code><span class="variable">$on</span>( <span class="string">'closeTip'</span>, <span class="keyword">function</span>( <span class="variable">$event</span> ) {
@@ -252,7 +252,7 @@
 <h3 id="总结">总结</h3><p>我这部分处理主要参考的就是参考资料1 &amp;&amp; 3，我这里对1的学习做个总结。首先感谢这篇分享，学到了很多，还有实例代码！主要用了文章中前两种实现方式。</p>
 <p>1  继承的通信方式</p>
 <p>单独一个基本属性，如定义一个变量，子级控制器能够从父级继承得到，而且父级修改会影响子级，但子级修改并不影响父级，而且子级如果有属性和父级同名，那么子级默认使用自己的变量。这和js 的作用域一样。如果要父级和子级控制器共享一个值，既父级子级修改都能相互影响，这就需要定义一个对象。因为对象是引用类型。。。</p>
-<p>2 基于事件$broadcast $emit 看参考资料2，使用 $broadcast 貌似有性能问题，不知现在的Angular版本是否解决。。。。感觉广播的方式确实会很降低效率，还是 $emit 好！</p>
+<p>2 基于事件 $broadcast, $emit 看参考资料2，使用 $broadcast 貌似有性能问题，不知现在的Angular版本是否解决。。。。感觉广播的方式确实会很降低效率，还是 $emit 好！</p>
 <p>3 服务的方式，我虽然没用这种方式实现，但感觉这种更倾向于模块化，比上面的实现思路更加清晰。。。而且更加通用</p>
 <p>这是目前关于控制器通信的一些认识。实现控制器通信方式这些文章介绍的很详细，大家可以参考下！欢迎指正我文章的错误~~</p>
 <h3 id="参考资料">参考资料</h3><ol>
@@ -315,7 +315,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="开头">开头</h2><p>最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下ng-if,ng-show/ng-hide,ng-switch 这几个指令。</p>
+        <h2 id="开头">开头</h2><p>最近在做一个项目改版，第一次在项目中真正使用Angular,和平时自己写写小demo,做做练习的感觉还是非常不同的，感觉非常的新鲜。有几个指令是经常用到的，这里由于这几个有点共性，所以一起介绍一下 ng-if,ng-show/ng-hide,ng-switch 这几个指令。</p>
 <h2 id="共性">共性</h2><ol>
 <li><p>这里个指令都是Angular框架提供给我们的设置页面内容显示和隐藏的方法，使用起来非常方便，尤其是做业务逻辑。</p>
 </li>
@@ -338,9 +338,9 @@
 </code></pre><p>也可以是直接使用 true / false</p>
 <pre><code>&lt;<span class="keyword">div</span> ng-<span class="keyword">if</span>='<span class="constant">true</span>'&gt;&lt;/<span class="keyword">div</span>&gt;
 </code></pre><p>对于变量，我们在js 中直接设置这个值就可以。</p>
-<p>这是一个能帮我们节省效率的指令，如果表达式值 === false , 则这部分不会在dom中渲染，或者原有的内容会被从dom中删除。所以如果有一部分内容，不需要一开始就显示，我们可以先用ng-if 让它隐藏。例如一个显示更多的下拉按钮，刚开始不显示的部分，可以ng-if 来设置，等我们点击了更多按钮，再设置ng-if = true 既可。这样子减少了页面渲染事件，提高了效率呢。</p>
+<p>这是一个能帮我们节省效率的指令，如果表达式值 === false , 则这部分不会在dom中渲染，或者原有的内容会被从dom中删除。所以如果有一部分内容，不需要一开始就显示，我们可以先用ng-if 让它隐藏。例如一个显示更多的下拉按钮，刚开始不显示的部分，可以ng-if 来设置，等我们点击了更多按钮，再设置 ng-if = true 既可。这样子减少了页面渲染事件，提高了效率呢。</p>
 <p>还有一个特性，ng-if 或创建自己的 scope，它通过原型继承父级的scope。一个典型的例子来自于参考资源1。</p>
-<p>还有一个小坑，$scope上面我可以直接给一个属性赋值如：</p>
+<p>还有一个小坑，$scope 上面我可以直接给一个属性赋值如：</p>
 <pre><code><span class="variable">$scope</span>.showpage = <span class="string">'abut'</span>
 </code></pre><p>但是如果直接赋值一个对象，对不起，需要先声明，再给对象添加属性</p>
 <pre><code><span class="variable">$scope</span>.data = {};
@@ -354,7 +354,7 @@
     &lt;<span class="operator">div</span> ng-<span class="keyword">switch</span>-<span class="operator">with</span>=<span class="string">'about'</span>&gt;&lt;/<span class="operator">div</span>&gt;
     &lt;<span class="operator">div</span> ng-<span class="keyword">switch</span>-<span class="operator">with</span>=<span class="string">'contact'</span>&gt;&lt;/<span class="operator">div</span>&gt;
 &lt;/<span class="operator">div</span>&gt;
-</code></pre><p>这也是一个能帮我们节省效率的指令。和ng-if 一样，一开始如果不等于父级的 ng-switch 表达式的值，则不会在页面渲染的，而且我们也可以通过 ng-switch-default 来设置默认的显示部分。比如以往常见的 Tab 选项卡，用这个指令实现起来就非常的容易。</p>
+</code></pre><p>这也是一个能帮我们节省效率的指令。和 ng-if 一样，一开始如果不等于父级的 ng-switch 表达式的值，则不会在页面渲染的，而且我们也可以通过 ng-switch-default 来设置默认的显示部分。比如以往常见的 Tab 选项卡，用这个指令实现起来就非常的容易。</p>
 <p>这里有一点疑问，因为我在项目中，做的单页面应用，所有不同部分都在一个页面里面。那么我经常需要根据不同的ajax返回值，显示不同的部分，（特殊原因不能使用路由），所以我这里就是用的 ng-switch 指令，根据不同返回值，显示不同部分。虽然也能实现按需显示，但看到有文章说这样使用 ng-switch 并不是很妥当，路过的朋友，有了解的可以指点我一下！我在这先谢过了~~</p>
 <p>后面我会继续分享Angular在项目开发中的经验，以及遇到的坑！</p>
 <p>参考资料中回答的非常精彩，也有实例，有兴趣也可以看下！</p>
